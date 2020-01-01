@@ -17,7 +17,6 @@ class LeMondeSpider(BaseSpider):
         if response.xpath("//meta[@property='og:article:published_time']/@content").extract_first(default="") != "":
             loader.add_xpath("date", "//meta[@property='og:article:published_time']/@content")
         loader.add_xpath("author", "//span[@class='meta__author']//text()")
-        loader.add_xpath("body", "//section[@class='article__content  old__article-content-single']//p//text()")
-
+        loader.add_xpath("body",'//p[@class="article__paragraph "]//text()')
         item = self.load_item(loader, response)
         self.save(newspaper=self.newspaper, item=item)
